@@ -32,6 +32,6 @@ model:
   path: ${model.dir}/${model.name}
 
 
-mlflow_tracking_ui: file:\C:\Users\GURURAJA\Desktop\MLOps Project1\mlruns
-mlflow_USERNAME: gururaja
-mlflow_PASSWORD: xx
+mlflow_tracking_ui: https://dagshub.com/gururaja-ai/customer_churn.mlflow
+mlflow_USERNAME: gururaja-ai
+mlflow_PASSWORD: asd@123

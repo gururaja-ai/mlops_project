@@ -5,6 +5,10 @@ from bentoml.io import JSON, NumpyNdarray
 from hydra import compose, initialize
 from patsy import dmatrix
 from pydantic import BaseModel
+from bentoml import BentoService, api, env, artifacts
+from bentoml.adapters import DataframeInput
+from bentoml.frameworks.sklearn import SklearnModelArtifact
+
 
 with initialize( config_path="../../config"):
     config = compose(config_name="main")
@@ -51,9 +55,13 @@ def transform_data(df: pd.DataFrame):
     return dummy_X.iloc[0, :].values.reshape(1, -1)
 
 
-model = bentoml.picklable_model.load_runner(
-    f"{MODEL_NAME}:latest", method_name="predict"
-)
+# model = bentoml.picklable_model.load_runner(
+#     f"{MODEL_NAME}:latest", method_name="predict"
+# )
+
+
+model=bentoml.xgboost.load_runner(f"{MODEL_NAME}:latest")
+
 # Create service with the model
 service = bentoml.Service("predict_employee", runners=[model])
 
